@@ -1,0 +1,4 @@
+.disabled-link { opacity: .55; cursor: not-allowed; }
+.link-group { display: flex; gap: 12px; flex-wrap: wrap; margin-top: 22px; }
+.online-list { display: grid; gap: 12px; }
+.online-list a { display: flex; justify-content: space-between; gap: 20px; padding: 16px 0; border-bottom: 1px solid var(--line); }
