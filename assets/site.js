@@ -7,7 +7,7 @@ if (navLinks && !navLinks.querySelector('[data-config-link="GITHUB_URL"]')) {
 }
 
 document.querySelectorAll('.footer-links').forEach(footer => {
-  footer.innerHTML = '<a href="mailto:your-email@example.com">Email</a><a href="#" data-config-link="GITHUB_URL">GitHub</a><a href="resume.html">Resume</a><a href="projects.html">Projects</a>';
+  footer.innerHTML = '<a href="mailto:zhi050216@gmail.com">Email</a><a href="#" data-config-link="GITHUB_URL">GitHub</a><a href="resume.html">Resume</a><a href="projects.html">Projects</a>';
 });
 
 const config = typeof SITE_CONFIG === 'undefined' ? {} : SITE_CONFIG;
@@ -34,3 +34,4 @@ document.querySelectorAll('[data-config-label]').forEach(label => {
   const url = config[key];
   label.textContent = url ? url.replace(/^https?:\/\//, '') : key;
 });
+
