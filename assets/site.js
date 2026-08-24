@@ -1,16 +1,20 @@
 document.querySelector('.menu')?.addEventListener('click',()=>document.querySelector('.nav-links')?.classList.toggle('open'));
 document.querySelectorAll('.nav-links a').forEach(a=>{if(location.pathname.endsWith(a.getAttribute('href')))a.classList.add('active')});
 
+const config = typeof SITE_CONFIG === 'undefined' ? {} : SITE_CONFIG;
+const personalGitHubUrl = config.GITHUB_URL;
 const navLinks = document.querySelector('.nav-links');
-if (navLinks && !navLinks.querySelector('[data-config-link="GITHUB_URL"]')) {
-  navLinks.insertAdjacentHTML('beforeend', '<a href="#" data-config-link="GITHUB_URL">GitHub</a>');
+if (navLinks && personalGitHubUrl && !navLinks.querySelector('[data-config-link="GITHUB_URL"]')) {
+  navLinks.insertAdjacentHTML('beforeend', `<a href="${personalGitHubUrl}" data-config-link="GITHUB_URL" target="_blank" rel="noopener noreferrer">GitHub</a>`);
 }
 
 document.querySelectorAll('.footer-links').forEach(footer => {
-  footer.innerHTML = '<a href="mailto:zhi050216@gmail.com">Email</a><a href="#" data-config-link="GITHUB_URL">GitHub</a><a href="resume.html">Resume</a><a href="projects.html">Projects</a>';
+  const githubLink = personalGitHubUrl
+    ? `<a href="${personalGitHubUrl}" data-config-link="GITHUB_URL" target="_blank" rel="noopener noreferrer">GitHub</a>`
+    : '';
+  footer.innerHTML = `<a href="mailto:zhi050216@gmail.com">Email</a>${githubLink}<a href="resume.html">Resume</a><a href="projects.html">Projects</a>`;
 });
 
-const config = typeof SITE_CONFIG === 'undefined' ? {} : SITE_CONFIG;
 document.querySelectorAll('[data-config-link]').forEach(link => {
   const key = link.dataset.configLink;
   const url = config[key];
@@ -21,7 +25,7 @@ document.querySelectorAll('[data-config-link]').forEach(link => {
   } else if (link.dataset.optional === 'true') {
     link.hidden = true;
   } else {
-    link.href = '#';
+    link.removeAttribute('href');
     link.classList.add('disabled-link');
     link.setAttribute('aria-disabled', 'true');
     link.title = `请在 assets/config.js 中配置 ${key}`;
